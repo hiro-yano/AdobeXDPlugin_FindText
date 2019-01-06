@@ -1,11 +1,9 @@
 <template>
     <div class="wrapper">
         <form @submit="onSubmit">
-            <h1>テキスト置換！</h1>
-            <MyInput ref="prev" label="置換前のテキスト"></MyInput>
-            <MyInput ref="after" label="置換後のテキスト"></MyInput>
+            <h1>テキスト検索</h1>
+            <MyInput ref="searchedText" label="テキスト"></MyInput>
 
-            <p class="attention">※実行をクリックするとアートボード直下のテキストのみが置換されます。</p>
             <MyFooter @onClickCancel="onCancelHandler" @onClickExecution="onClickExecution"></MyFooter>
         </form>
     </div>
@@ -32,7 +30,7 @@
                 this.dialog.close();
             },
             onClickExecution() {
-                this.dialog.close([this.$refs.prev.getValue(), this.$refs.after.getValue()]);
+                this.dialog.close([this.$refs.searchedText.getValue()]);
             },
         },
     }

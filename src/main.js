@@ -20,11 +20,14 @@ function createDialog(id = "dialog") {
     return dialog;
 }
 
-function replaceText(children, prev, after) {
+function findText(children, searchedText) {
     children.forEach(elm => {
-        if (elm instanceof Text) {
-            elm.text = elm.text.replace(prev, after);
+        if(elm instanceof Text && elm.text.search(searchedText)>=0){
+            console.log("・"+ elm.text);
         }
+        else{
+            findText(elm.children, searchedText) 
+        } 
     });
 }
 // エントリポイントとなるメソッドです
@@ -32,13 +35,21 @@ async function showReplaceDialog(selection, root) {
     const dialog = createDialog();
     const result = await dialog.showModal();
     if (result) {
+        console.log("*".repeat(30))
+        console.log("Searched Text:" + result[0]);
+        console.log()
         root.children.forEach(elm => {
             if (elm instanceof Artboard) {
-                replaceText(elm.children, new RegExp(result[0], 'g'), result[1]);
+                console.log("===== Artboard :" + elm.name + " =====")
+                findText(elm.children, new RegExp(result[0], 'g'));
+                console.log("================" + "=".repeat(elm.name.length * 2) + "=====")
+                console.log()
             }
         });
+        console.log("*".repeat(30))
     }
 }
+
 // manifest.jsonで指定したコマンドIDとファンクションを紐づけます
 module.exports = {
     commands: {
