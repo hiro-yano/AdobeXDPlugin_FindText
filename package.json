@@ -8,7 +8,7 @@
     "deploy": "xdpm install ./dist -o",
     "format": "prettier --write 'src/**/*.{js,vue}'",
     "validate": "xdpm validate ./dist",
-    "package": "xdpm package ./dist && mv dist.xdx japanese-proofreading.xdx"
+    "package": "xdpm package ./dist && mv dist.xdx find_text.xdx"
   },
   "devDependencies": {
     "@adobe/xdpm": "^1.1.2",
